@@ -15,8 +15,6 @@ var imageStyle = {
     float: 'left'
 }
 
-var imageDOMS = []
-
 var body = document.getElementsByTagName('body')[0]
 
 body.className = 'swiper-container swiper-no-swiping'
@@ -44,7 +42,6 @@ function init(imageArr){
     for(var i=0; i<length; i++ ){
             var imageDOM = document.createElement('img')
             imageDOM.className = 'swiper-slide'
-            imageDOMS.push(imageDOM)
             initStyle(imageDOM,imageStyle)
             imageDOM.src = imageArr[i]
             content.appendChild(imageDOM)
@@ -62,6 +59,5 @@ function carousel(){
 }
 
 init(imageurls)
-
 
 carousel()
