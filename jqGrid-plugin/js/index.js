@@ -2,15 +2,26 @@ var freezeTableManager = {
 	isInit:false,
 	// methods
 	initThead:function(){
-		var headTr = this.titleBox.find('tr').clone()
+		var _this = this;
+		var headTr = this.titleBox.find('tr').clone();
+		this.tHead = $('<thead></thead>');
 		$.map(headTr,function(item){
-			item.innerHtml = $(headTr[i]).find('th')[0]
+			var th = $('<tr></tr>');
+			th.append($(item).find('th')[0]);
+			_this.tHead.append(th);
 		})
-		this.tHead = $('<thead></thead>').append(headTr)
 		return this.tHead
 	},
 	initTbody:function(){
-
+		var _this = this;
+		var bodyTr = this.bodyBox.find('tr').clone();
+		this.tBody = $('<tbody></tbody>');
+		$.map(bodyTr,function(item){
+			var th = $('<tr class="ui-widget-content jqgrow ui-row-ltr"></tr>');
+			th.append($(item).find('td')[0]);
+			_this.tBody.append(th);
+		})
+		return this.tBody
 	},
 	// metnods end
 	init:function(id){
@@ -26,24 +37,39 @@ var freezeTableManager = {
 			position: 'relative' //相对定位
 		})
 
-		this.table = $('<table><thead></thead><tbody></tbody></tbody></table>')[0]
+		this.table = $(
+		'<div>\
+			<div class="ui-state-default ui-jqgrid-hdiv">\
+				<div class="ui-jqgrid-hbox">\
+					<table class="headTable" role="grid" aria-labelledby="gbox_list2" cellspacing="0" cellpadding="0" border="0"\
+					></table>\
+				</div>\
+			</div>\
+			<div class="ui-jqgrid-bdiv">\
+				<div style="box-sizing:border-box">\
+					<table class="bodyTable" tabindex="0" cellspacing="0" cellpadding="0" border="0" role="grid" aria-multiselectable="false" aria-labelledby="gbox_list2" class="ui-jqgrid-btable"\
+					></table>\
+				</div>\
+			</div>\
+		</div>'
+		)
+
 		// 找到所有第一列的dom 元素
 		// 找到 head 里面 所有tr的
 		this.initThead()
 		// 找到 body 里面 所有tr的第一个td 
-		console.log(this.tHead)
+		this.initTbody()
 		// var bodyTr =
-		$(this.table).css({
+		this.table.css({
 			position:'absolute',
 			left:0,
 			top:titleHeight||0,
-			display:'block',
-			width:'100px',
-			height: '400px',
-			background: 'red',
-			zIndex:'2'
-		})
-		$('')
+			zIndex:'2',
+			background:'white'
+		}).find('.headTable').append(this.tHead)
+		
+		this.table.find('.bodyTable').append(this.tBody)
+
 		contentView.append(this.table)
 	}
 }
@@ -88,16 +114,16 @@ function pageInit(){
 						// var val = $('#list2'+'_'+'id').scrollLeft()
 						var offsetLeft = bodyBox.scrollLeft()
 						console.log(offsetLeft)
-						if(offsetLeft> 1 && offsetLeft<55){
+						if(offsetLeft> 0 && offsetLeft<55){
 							// 冻结第一列
 							console.log('冻结第一列')
 							if(!freezeTableManager.isInit){
 								freezeTableManager.init('#list2',)
 							}
-						}else if(offsetLeft< 55 + 90) {
+						}else if(offsetLeft< 55 + 90&&offsetLeft>=55) {
 							// 冻结第二列
 							console.log('冻结第二列')
-						}else {
+						}else if(offsetLeft>=55 + 90){
 							// 冻结三列
 							console.log('冻结第三列')
 						}
