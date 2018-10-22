@@ -1,30 +1,36 @@
 var freezeTableManager = {
 	isInit:false,
 	// methods
-	initThead:function(){
+	initThead: function(){
 		var _this = this;
-		var headTr = this.titleBox.find('tr').clone();
+		var originHeadTr = this.titleBox.find('tr')
+		var headTr = originHeadTr.clone();
+		var originTh = originHeadTr.find('th')
+		var thWidth = originTh.eq(0).width()
+		var thHeight = originTh.eq(0).height()
 		this.tHead = $('<thead></thead>');
 		$.map(headTr,function(item){
-			var th = $('<tr></tr>');
-			th.append($(item).find('th')[0]);
-			_this.tHead.append(th);
+			var tr = $('<tr></tr>');
+			var th = $(item).find('th').eq(0)
+			th.css({width:thWidth,height:thHeight-1,boxSizing:'border-box'}).find('span').remove()
+			tr.append(th);
+			_this.tHead.append(tr);
 		})
 		return this.tHead
 	},
-	initTbody:function(){
+	initTbody: function(){
 		var _this = this;
 		var bodyTr = this.bodyBox.find('tr').clone();
 		this.tBody = $('<tbody></tbody>');
 		$.map(bodyTr,function(item){
-			var th = $('<tr class="ui-widget-content jqgrow ui-row-ltr"></tr>');
-			th.append($(item).find('td')[0]);
-			_this.tBody.append(th);
+			var tr = $('<tr class="ui-widget-content jqgrow ui-row-ltr"></tr>');
+			tr.append($(item).find('td')[0]);
+			_this.tBody.append(tr);
 		})
 		return this.tBody
 	},
 	// metnods end
-	init:function(id){
+	init: function(id){
 		this.isInit = true
 		var contentView = $(id).parents('.ui-jqgrid-view')
 		this.contentView = contentView // 保存父盒子
@@ -39,21 +45,26 @@ var freezeTableManager = {
 
 		this.table = $(
 		'<div>\
-			<div class="ui-state-default ui-jqgrid-hdiv">\
+			<div class="ui-state-default ui-jqgrid-hdiv" style="background: transparent">\
 				<div class="ui-jqgrid-hbox">\
 					<table class="headTable" role="grid" aria-labelledby="gbox_list2" cellspacing="0" cellpadding="0" border="0"\
 					></table>\
 				</div>\
 			</div>\
 			<div class="ui-jqgrid-bdiv">\
-				<div style="box-sizing:border-box">\
+				<div \
+					style=" height:'+ (this.bodyBox.outerHeight() - 16.5) +'px;\
+					overflow: hidden;\
+					position: relative"\
+				>\
 					<table class="bodyTable" tabindex="0" cellspacing="0" cellpadding="0" border="0" role="grid" aria-multiselectable="false" aria-labelledby="gbox_list2" class="ui-jqgrid-btable"\
+					style="position:absolute"\
 					></table>\
 				</div>\
 			</div>\
 		</div>'
 		)
-
+		
 		// 找到所有第一列的dom 元素
 		// 找到 head 里面 所有tr的
 		this.initThead()
@@ -65,12 +76,99 @@ var freezeTableManager = {
 			left:0,
 			top:titleHeight||0,
 			zIndex:'2',
-			background:'white'
+			backgroundColor: 'transparent'
 		}).find('.headTable').append(this.tHead)
 		
 		this.table.find('.bodyTable').append(this.tBody)
 
 		contentView.append(this.table)
+	},
+	scrollTopChange: function (top){
+		if(this.table){
+			this.table.find('.bodyTable').css({
+				top: -top
+			})
+		}
+	},
+	freezeColumnsWithCount: function(count){
+		this.reSetThWithCount(count)
+		this.reSetTdWithCount(count)
+	},
+	reSetThWithCount: function(count){
+		var _this = this;
+		var originHeadTr = this.titleBox.find('tr')
+		var headTr = originHeadTr.clone();
+		var originTh = originHeadTr.find('th')
+		this.tHead = this.table.find('thead')
+		this.tHead.find('tr').remove()
+		$.map(headTr,function(item){
+			var tr = $('<tr></tr>');
+			for(var i = 0; i < count; i++){
+				var th = $(item).find('th').eq(i)
+				var thWidth = originTh.eq(i).width()
+				var thHeight = originTh.eq(i).height()
+				th.css({width:thWidth,height:thHeight-1,boxSizing:'border-box'}).find('span').remove()
+				tr.append(th.clone());				
+			}
+			_this.tHead.append(tr);
+		})
+		return this.tHead
+	},
+	reSetTdWithCount: function(count){
+		var _this = this;
+		var bodyTr = this.bodyBox.find('tr').clone();
+		this.tBody = this.table.find('tbody')
+		this.tBody.find('tr').remove()
+		$.map(bodyTr,function(item){
+			var tr = $('<tr class="ui-widget-content jqgrow ui-row-ltr"></tr>');
+			for(var i = 0; i < count; i++){
+				var td = $(item).find('td')[i]
+				tr.append($(td).clone());
+			}
+			_this.tBody.append(tr);
+		})
+	},
+	hiddenTable(){
+		if(this.table){
+			this.table.css({
+				display:'none'
+			})
+		}
+	},
+	showTable(){
+		if(this.table){
+			this.table.css({
+				display:'block'
+			})
+		}
+	},
+	setFreezeTable: function(param){
+		var bodyBox = $(param['id']).parents('.ui-jqgrid-bdiv')
+		var offsetLeft = bodyBox.scrollLeft()
+		var offsetTop = bodyBox.scrollTop()
+		if(offsetLeft> (param['left']||10) && offsetLeft<param['cloumnsWidth'][0]){
+			// 冻结第一列
+			if(!this.isInit){
+				this.init(param['id'])
+			}else{
+				this.freezeColumnsWithCount(1)
+			}
+			this.showTable()
+		}else if(offsetLeft< param['cloumnsWidth'][1]&&offsetLeft>=param['cloumnsWidth'][0]) {
+			console.log('111134345')
+			// 冻结第二列
+			this.freezeColumnsWithCount(2)
+			this.showTable()
+		}else if(offsetLeft>=param['cloumnsWidth'][1]){
+			// 冻结三列
+			this.freezeColumnsWithCount(3)
+			this.showTable()
+		} else {
+			this.hiddenTable()
+		}
+		if(offsetTop){
+			this.scrollTopChange(offsetTop)
+		}
 	}
 }
 
@@ -110,23 +208,11 @@ function pageInit(){
 				gridComplete: function(){
 					var bodyBox = $('#list2').parents('.ui-jqgrid-bdiv')
 					bodyBox.on('scroll', function(){
-						console.log('滚动')
-						// var val = $('#list2'+'_'+'id').scrollLeft()
-						var offsetLeft = bodyBox.scrollLeft()
-						console.log(offsetLeft)
-						if(offsetLeft> 0 && offsetLeft<55){
-							// 冻结第一列
-							console.log('冻结第一列')
-							if(!freezeTableManager.isInit){
-								freezeTableManager.init('#list2',)
-							}
-						}else if(offsetLeft< 55 + 90&&offsetLeft>=55) {
-							// 冻结第二列
-							console.log('冻结第二列')
-						}else if(offsetLeft>=55 + 90){
-							// 冻结三列
-							console.log('冻结第三列')
-						}
+						freezeTableManager.setFreezeTable({
+							id:'#list2',
+							cloumnsWidth:[55,90+55],
+							left:12
+						})
 					})
 				}
 			});
