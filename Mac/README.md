@@ -49,6 +49,7 @@
 
     10 Vetur
 
+    11 设置 html 和 jsx tab 键自动补全 => Code => 首选项 => 设置 => 输入 emmet.triggerExpansionOnTab => 打勾
 
 
 4 vpn （shadowsocks）
