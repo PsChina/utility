@@ -56,7 +56,7 @@
     11 设置 html 和 jsx tab 键自动补全 => Code => 首选项 => 设置 => 输入 emmet.triggerExpansionOnTab => 打勾
 
 
-4 [vpnShadowsocksX-NG)](https://github.com/shadowsocks/ShadowsocksX-NG)
+4 [vpn(ShadowsocksX-NG)](https://github.com/shadowsocks/ShadowsocksX-NG)
   [点击下载v1.8.2](https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v1.8.2/ShadowsocksX-NG.app.1.8.2.zip)
 
 5 [谷歌浏览器](https://www.google.com/chrome/)
