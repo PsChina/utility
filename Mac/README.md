@@ -81,3 +81,7 @@
 11 一款游戏比如 [英雄联盟-美服](https://signup.na.leagueoflegends.com/en/signup/redownload)
   [点击下载](https://riotgamespatcher-a.akamaihd.net/releases/Maclive/installer/deploy/League%20of%20Legends%20installer%20NA.dmg)
 
+
+12 代替 xshell 与 xftp 的工具
+
+[免密登陆服务器]()
