@@ -21,7 +21,7 @@
 
     sudo npm i webpack-dev-server -g # 本地服务
 ```
-2 git
+2 git mac 自带下载链接只需在中断输入 git 回车就会收到下载提示。
 
 [git 配置](https://github.com/PsChina/angularJS/blob/master/1-git/1.git%E7%9A%84%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.md)
 
@@ -56,7 +56,7 @@
     11 设置 html 和 jsx tab 键自动补全 => Code => 首选项 => 设置 => 输入 emmet.triggerExpansionOnTab => 打勾
 
 
-4 [vpn(ShadowsocksX-NG)] (https://github.com/shadowsocks/ShadowsocksX-NG)
+4 [vpnShadowsocksX-NG)](https://github.com/shadowsocks/ShadowsocksX-NG)
   [点击下载v1.8.2](https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v1.8.2/ShadowsocksX-NG.app.1.8.2.zip)
 
 5 [谷歌浏览器](https://www.google.com/chrome/)
