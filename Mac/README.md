@@ -39,21 +39,19 @@
 
     3 Path Autocomplete
 
-    4 open in browser 
+    4 ES7 React/Redux/GraphQL/React-Native snippets
 
-    5 ES7 React/Redux/GraphQL/React-Native snippets
+    5 React Native Tools
 
-    6 React Native Tools
+    6 TSLint 或者 ESLint
 
-    7 TSLint 或者 ESLint
+    7 Typescript React code snippets
 
-    8 Typescript React code snippets
+    8 Vue 2 Snippets
 
-    9 Vue 2 Snippets
+    9 Vetur
 
-    10 Vetur
-
-    11 设置 html 和 jsx tab 键自动补全 => Code => 首选项 => 设置 => 输入 emmet.triggerExpansionOnTab => 打勾
+    10 设置 html 和 jsx tab 键自动补全 => Code => 首选项 => 设置 => 输入 emmet.triggerExpansionOnTab => 打勾
 
 
 4 [vpn(ShadowsocksX-NG)](https://github.com/shadowsocks/ShadowsocksX-NG)
