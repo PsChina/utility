@@ -83,3 +83,5 @@
 12 代替 xshell 与 xftp 的工具
 
 [免密登陆服务器](https://github.com/PsChina/utility/blob/master/Mac/%E5%A6%82%E4%BD%95%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8.md)
+
+13 [翻墙小飞机][https://www.lanzous.com/i3wm98j?t]
