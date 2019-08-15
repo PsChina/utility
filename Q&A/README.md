@@ -59,9 +59,9 @@ class LocalStorage1MCache {
     _1MCache[key] = val;
     localStorage.setItem(this.name, JSON.stringify(_1MCache));
     this.keysIndexArray.push(key);
-    do {
+    while (this.size() / 1024 > 1) {
       this.removeItem(this.keysIndexArray[0]);
-    } while (this.size() / 1024 > 1);
+    };
   }
   getItem(key) {
     return this.getSelf()[key];
