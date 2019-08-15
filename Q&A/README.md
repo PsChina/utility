@@ -71,7 +71,7 @@ class LocalStorage1MCache {
     _1MCache[key] = undefined;
     delete _1MCache[key];
     localStorage.setItem(this.name, JSON.stringify(_1MCache));
-    this.keysIndexArray.splice(this.keysIndexArray.findIndex(key), 1);
+    this.keysIndexArray.splice(this.keysIndexArray.indexOf(key), 1);
   }
   size() {
     return JSON.stringify(this.getSelf()).length;
