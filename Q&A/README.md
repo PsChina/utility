@@ -48,7 +48,7 @@ function request(urls, maxNumber, callback) {
 // 3
 class LocalStorage1MCache {
   constructor() {
-    this.name = "1MCache" + Math.round() * 100000000 + Date.now();
+    this.name = "1MCache" + Math.random() * 100000000 + Date.now();
     this.keysIndexArray = [];
   }
   getSelf() {
