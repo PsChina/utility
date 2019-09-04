@@ -52,6 +52,8 @@
     9 Vetur
 
     10 设置 html 和 jsx tab 键自动补全 => Code => 首选项 => 设置 => 输入 emmet.triggerExpansionOnTab => 打勾
+    
+    11 Polacode 超精致，超好用的代码图片生成工具
 
 
 4 [vpn(ShadowsocksX-NG)](https://github.com/shadowsocks/ShadowsocksX-NG)
