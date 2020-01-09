@@ -19,3 +19,16 @@
 <<在绝望中寻找希望>>
 
 <<普京传>>
+
+
+优势:
+
+1. 可以编写iOS原生代码
+1. 可以编写h5，熟悉 vue rect typescript 熟悉 webpack eslint
+1. 能发布 vue 插件  基于nodejs 的 cmd 命令行工具
+1. 有信心编写 electron app
+1. 熟悉websocket
+1. 编写过 hybrid app
+1. 有教学经历可以培训新同事
+1. 有区块链行业和金融行业从业经历了解区块链底层逻辑
+1. 能独立开发软件编写相关文档
